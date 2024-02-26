@@ -1,0 +1,11 @@
+{
+  "name": "@billyjacoby/packages",
+  "version": "1.0.0",
+  "main": "index.js",
+  "author": "Billy Jacoby",
+  "license": "MIT",
+  "workspaces": [
+    "./packages/*"
+  ],
+  "packageManager": "yarn@4.0.2"
+}
