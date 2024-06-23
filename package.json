@@ -10,5 +10,5 @@
   "scripts": {
     "publish:eslint": "cd packages/eslint-config && npm publish --access public"
   },
-  "packageManager": "yarn@4.0.2"
+  "packageManager": "yarn@4.3.1"
 }
