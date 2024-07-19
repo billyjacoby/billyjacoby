@@ -7,6 +7,7 @@ import {
   BlocksFeature,
   BoldFeature,
   ChecklistFeature,
+  FixedToolbarFeature,
   HeadingFeature,
   IndentFeature,
   InlineCodeFeature,
@@ -19,55 +20,26 @@ import {
   UnorderedListFeature,
   UploadFeature,
 } from '@payloadcms/richtext-lexical'
-//import { slateEditor } from '@payloadcms/richtext-slate'
 import { postgresAdapter } from '@payloadcms/db-postgres'
 import { buildConfig } from 'payload'
 import sharp from 'sharp'
 import { fileURLToPath } from 'url'
+import { users, posts, media, tags } from '@/cms/collections'
+import { slateEditor } from '@payloadcms/richtext-slate'
 
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
 
 export default buildConfig({
-  //editor: slateEditor({}),
-  editor: lexicalEditor(),
-  collections: [
-    {
-      slug: 'users',
-      auth: true,
-      access: {
-        delete: () => false,
-        update: () => false,
-      },
-      fields: [],
-    },
-    {
-      slug: 'pages',
-      admin: {
-        useAsTitle: 'title',
-      },
-      fields: [
-        {
-          name: 'title',
-          type: 'text',
-        },
-        {
-          name: 'content',
-          type: 'richText',
-        },
-      ],
-    },
-    {
-      slug: 'media',
-      upload: true,
-      fields: [
-        {
-          name: 'text',
-          type: 'text',
-        },
-      ],
-    },
-  ],
+  // editor: lexicalEditor({
+  //   features: ({ defaultFeatures }) => [
+  //     ...defaultFeatures,
+  //     InlineCodeFeature(),
+  //     FixedToolbarFeature(),
+  //   ],
+  // }),
+  editor: slateEditor({}),
+  collections: [users, media, tags, posts],
   secret: process.env.PAYLOAD_SECRET || '',
   typescript: {
     outputFile: path.resolve(dirname, 'payload-types.ts'),
