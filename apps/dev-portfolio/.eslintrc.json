@@ -1,3 +1,6 @@
 {
-  "extends": ["@billyjacoby/eslint-config"]
+  "extends": ["@billyjacoby/eslint-config"],
+  "rules": {
+    "react/prop-types": "off"
+  }
 }
