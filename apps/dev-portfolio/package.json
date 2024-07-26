@@ -1,13 +1,14 @@
 {
   "name": "developer-portfolio",
-  "description": "Portfolio of Abu Said",
+  "description": "Billy Jacoby - dev portfolio",
   "version": "0.1.0",
   "private": true,
   "scripts": {
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "type-check": "tsc --pretty --noEmit"
   },
   "dependencies": {
     "@billyjacoby/eslint-config": "^1.0.1",
