@@ -8,7 +8,7 @@ import { MdAlternateEmail } from 'react-icons/md';
 import ContactWithCaptcha from './contact-with-captcha';
 import ContactWithoutCaptcha from './contact-without-captcha';
 
-import { personalData } from '@/utils/data/personal-data';
+import { personalData } from '@/utils/data/personal';
 
 function ContactSection() {
   return (

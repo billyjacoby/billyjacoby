@@ -1,6 +1,6 @@
 import BlogCard from '../components/homepage/blog/blog-card';
 
-import { personalData } from '@/utils/data/personal-data';
+import { personalData } from '@/utils/data/personal';
 
 async function getBlogs() {
   const res = await fetch(

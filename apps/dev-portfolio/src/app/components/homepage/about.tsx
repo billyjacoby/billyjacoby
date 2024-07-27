@@ -2,7 +2,7 @@
 
 import Image from 'next/image';
 
-import { personalData } from '@/utils/data/personal-data';
+import { personalData } from '@/utils/data/personal';
 
 function AboutSection() {
   return (
@@ -15,7 +15,7 @@ function AboutSection() {
       </div>
       <div className="grid grid-cols-1 gap-8 lg:grid-cols-2 lg:gap-16">
         <div className="order-2 lg:order-1">
-          <p className="mb-5 text-xl font-medium uppercase text-green-500">
+          <p className="mb-5 text-xl font-medium uppercase text-accent-green">
             Who am I?
           </p>
           <p className="text-sm text-gray-200 lg:text-lg">

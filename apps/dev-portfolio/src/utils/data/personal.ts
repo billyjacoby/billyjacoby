@@ -3,7 +3,7 @@ export const personalData = {
   profile: '/profile-square.png',
   designation: 'Software Engineer',
   description:
-    'Excepteur ullamco consequat magna cillum ut esse esse laboris id nostrud culpa elit. Sunt et excepteur eiusmod tempor aute sint. Irure eu aute et aliqua dolor pariatur nostrud exercitation exercitation aliquip. Excepteur qui laborum commodo exercitation sit fugiat tempor adipisicing quis duis anim.',
+    'I specialize in the development of high-performing mobile first applications. I possess exceptional problem-solving abilities and continuously learn new things by staying up to date with cutting-edge technologies. I primarily focus my time around TypeScript, React, React Native, and Node.js frameworks.',
   email: 'billyjacoby@gmail.com',
   address: 'Brodheadsville, PA USA ',
   github: 'https://github.com/billyjacoby',

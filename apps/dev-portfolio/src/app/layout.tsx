@@ -11,7 +11,7 @@ import './css/globals.scss';
 const inter = Inter({ subsets: ['latin'] });
 
 export const metadata = {
-  title: 'Portfolio of Billy Jacoby - Software Developer',
+  title: 'Portfolio of Billy Jacoby - Software Engineer',
   description:
     'This is the portfolio of Billy Jacoby. Ex aute do sit labore aliquip anim officia Lorem irure minim. Non adipisicing ipsum do ipsum quis voluptate proident. Nisi irure elit tempor eiusmod ad reprehenderit et excepteur est ipsum laborum anim veniam. Excepteur enim esse laboris ut nisi fugiat aliqua occaecat incididunt.',
 };

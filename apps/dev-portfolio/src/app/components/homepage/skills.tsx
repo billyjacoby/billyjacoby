@@ -31,6 +31,7 @@ function Skills() {
       </div>
 
       <div className="my-12 w-full">
+        {/* // TODO: Make this scrollable maybe with a carousel? */}
         <Marquee
           gradient={false}
           speed={80}

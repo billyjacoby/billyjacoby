@@ -2,11 +2,10 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { BsGithub, BsLinkedin } from 'react-icons/bs';
 import { FaTwitterSquare } from 'react-icons/fa';
-import { RiContactsFill } from 'react-icons/ri';
 
 import { FancyCodeBlock } from './fancy-codeblock';
 
-import { personalData } from '@/utils/data/personal-data';
+import { personalData } from '@/utils/data/personal';
 
 export default function HeroSection() {
   return (
@@ -20,47 +19,38 @@ export default function HeroSection() {
       />
 
       <div className="grid grid-cols-1 items-start gap-y-8 lg:grid-cols-2 lg:gap-12">
-        <div className="order-2 flex flex-col items-start justify-center p-2 pb-20 md:pb-10 lg:order-1 lg:pt-10">
+        <div className="order-2 flex flex-col items-start justify-center p-2 lg:order-1 lg:pt-10">
           <h1 className="text-3xl font-bold leading-10 text-white md:font-extrabold lg:text-[2.6rem] lg:leading-[3.5rem]">
             Hello, <br />
             I'm <span className=" text-pink-500">{personalData.name}</span>
             {", I'm a Professional "}
-            <span className=" text-green-500">{personalData.designation}</span>.
+            <span className=" text-accent-green">
+              {personalData.designation}
+            </span>
+            .
           </h1>
 
-          <div className="my-12 flex items-center gap-5">
+          <div className="my-12 flex w-full items-center justify-evenly gap-5">
             <Link
               href={personalData.github}
               target="_blank"
               className="text-pink-500 transition-all duration-300 hover:scale-125"
             >
-              <BsGithub size={30} />
+              <BsGithub size={60} />
             </Link>
             <Link
               href={personalData.linkedIn}
               target="_blank"
               className="text-pink-500 transition-all duration-300 hover:scale-125"
             >
-              <BsLinkedin size={30} />
+              <BsLinkedin size={60} />
             </Link>
             <Link
               href={personalData.twitter}
               target="_blank"
               className="text-pink-500 transition-all duration-300 hover:scale-125"
             >
-              <FaTwitterSquare size={30} />
-            </Link>
-          </div>
-
-          <div className="flex items-center gap-3">
-            <Link
-              href="#contact"
-              className="rounded-full bg-gradient-to-r from-violet-600 to-pink-500 p-px transition-all duration-300 hover:from-pink-500 hover:to-violet-600"
-            >
-              <button className="flex items-center gap-1 rounded-full border-none bg-[#0d1224] p-3 text-center text-xs font-medium uppercase tracking-wider text-[#ffff] no-underline transition-all duration-200 ease-out hover:gap-3  md:px-8 md:py-4 md:text-sm md:font-semibold">
-                <span>Contact me</span>
-                <RiContactsFill size={16} />
-              </button>
+              <FaTwitterSquare size={60} />
             </Link>
           </div>
         </div>
