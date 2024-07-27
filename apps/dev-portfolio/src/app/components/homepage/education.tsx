@@ -61,7 +61,7 @@ function Education() {
                       className="absolute bottom-0 opacity-80"
                     />
                     <div className="flex justify-center">
-                      <p className="text-xs text-green-500 sm:text-sm">
+                      <p className="text-xs text-accent-green sm:text-sm">
                         {education.duration}
                       </p>
                     </div>

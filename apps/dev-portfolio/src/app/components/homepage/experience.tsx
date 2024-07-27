@@ -26,7 +26,7 @@ function Experience() {
         <div className="flex  items-center">
           <span className="h-[2px] w-24 bg-[#1a1443]"></span>
           <span className="w-fit rounded-md bg-[#1a1443] p-2 px-5 text-xl text-white">
-            Experiences
+            Experience
           </span>
           <span className="h-[2px] w-24 bg-[#1a1443]"></span>
         </div>
@@ -53,8 +53,8 @@ function Experience() {
                       className="absolute bottom-0 opacity-80"
                     />
                     <div className="flex justify-center">
-                      <p className="text-xs text-green-500 sm:text-sm">
-                        {exp.duration}
+                      <p className="text-accent-green text-xs sm:text-sm">
+                        {exp.start} - {exp.end}
                       </p>
                     </div>
                     <div className="flex items-center gap-x-8 px-3 py-5">

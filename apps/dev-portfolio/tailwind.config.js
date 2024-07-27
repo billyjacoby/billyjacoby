@@ -1,3 +1,4 @@
+/* eslint-disable no-undef */
 /** @type {import('tailwindcss').Config} */
 module.exports = {
   content: [
@@ -22,6 +23,10 @@ module.exports = {
           '2xl': '4rem',
           '3xl': '5rem',
         },
+      },
+      colors: {
+        'accent-green': 'rgb(34 197 94)',
+        'accent-pink': 'rgb(219 39 119)',
       },
 
       extend: {

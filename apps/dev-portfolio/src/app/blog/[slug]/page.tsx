@@ -1,5 +1,5 @@
 // @flow strict
-import { personalData } from '@/utils/data/personal-data';
+import { personalData } from '@/utils/data/personal';
 
 async function getBlog(slug) {
   const res = await fetch(

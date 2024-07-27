@@ -11,7 +11,7 @@ function Footer() {
             <Link
               target="_blank"
               href="https://www.linkedin.com/in/billyjacoby/"
-              className="text-green-500"
+              className="text-accent-green"
             >
               billy jacoby
             </Link>
@@ -20,7 +20,7 @@ function Footer() {
             <Link
               target="_blank"
               href="https://github.com/said7388/developer-portfolio"
-              className="flex items-center gap-2 uppercase hover:text-green-500"
+              className="flex items-center gap-2 uppercase hover:text-accent-green"
             >
               <IoStar />
               <span>Star</span>
@@ -28,7 +28,7 @@ function Footer() {
             <Link
               target="_blank"
               href="https://github.com/said7388/developer-portfolio/fork"
-              className="flex items-center gap-2 uppercase hover:text-green-500"
+              className="flex items-center gap-2 uppercase hover:text-accent-green"
             >
               <CgGitFork />
               <span>Fork</span>

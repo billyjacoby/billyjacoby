@@ -203,7 +203,7 @@ const SingleProject = ({ project }) => {
           </Link>
         </div>
       </div>
-      <p className="absolute left-0 top-0 w-[90%] translate-x-[-110%] translate-y-1/4 rounded-[0_20px_20px_0] bg-[#0f0b24] p-6 text-xs leading-[110%] text-[#EFF3F4] transition-transform  duration-[0.9s] group-hover:translate-x-[-2%] md:min-h-[150px] md:w-[85%] md:translate-y-[50%] md:text-sm">
+      <p className="absolute left-0 top-0 w-[90%] translate-x-[-110%] translate-y-1/4 rounded-[0_20px_20px_0] bg-[#0f0b24] p-6 text-xs leading-[110%] text-[#EFF3F4] transition-transform  duration-[0.9s] group-hover:translate-x-[-2%] md:min-h-[150px] md:w-[85%] md:translate-y-1/2 md:text-sm">
         {description}
       </p>
       <div className="absolute bottom-4 right-0 flex w-[140px] translate-x-full flex-col justify-center gap-2 rounded-[10px_0_0_10px] bg-[#0f0b24] p-[0.825rem] text-[0.8rem] text-[#EFF3F4] transition-transform delay-[0.3s] duration-[0.5s] group-hover:translate-x-0">
