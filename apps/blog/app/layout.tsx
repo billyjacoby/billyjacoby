@@ -4,11 +4,15 @@ import { Space_Grotesk } from 'next/font/google';
 import { ThemeProviders } from './theme-providers';
 
 import '../css/tailwind.css';
+import '../css/card.scss';
+import '../css/globals.scss';
 import Footer from '@/components/Footer';
-import Header from '@/components/Header';
 import SectionContainer from '@/components/SectionContainer';
 import { Analytics, AnalyticsConfig } from 'pliny/analytics';
 import { SearchProvider, SearchConfig } from 'pliny/search';
+import ScrollToTop from '@/components/helper/scroll-to-top';
+import Navbar from '@/components/navbar';
+import Header from '@/components/Header';
 
 const space_grotesk = Space_Grotesk({
   subsets: ['latin'],
@@ -108,13 +112,14 @@ export default function RootLayout({
             analyticsConfig={siteMetadata.analytics as AnalyticsConfig}
           />
           <SectionContainer>
-            <div className="flex h-screen flex-col justify-between font-sans">
-              <SearchProvider
-                searchConfig={siteMetadata.search as SearchConfig}
-              >
+            <SearchProvider searchConfig={siteMetadata.search as SearchConfig}>
+              <main className="relative mx-auto min-h-screen px-6 text-white sm:px-12 lg:max-w-[70rem] xl:max-w-[76rem] 2xl:max-w-[92rem]">
+                <Header />
                 {children}
-              </SearchProvider>
-            </div>
+                <ScrollToTop />
+              </main>
+              <Footer />
+            </SearchProvider>
           </SectionContainer>
         </ThemeProviders>
       </body>

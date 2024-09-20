@@ -15,6 +15,22 @@ module.exports = {
   darkMode: 'class',
   theme: {
     extend: {
+      container: {
+        center: true,
+        padding: {
+          DEFAULT: '1rem',
+          sm: '2rem',
+          lg: '3rem',
+          xl: '4rem',
+          '2xl': '4rem',
+          '3xl': '5rem',
+        },
+      },
+      backgroundImage: {
+        'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
+        'gradient-conic':
+          'conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))',
+      },
       lineHeight: {
         11: '2.75rem',
         12: '3rem',
@@ -25,8 +41,13 @@ module.exports = {
         sans: ['var(--font-space-grotesk)', ...fontFamily.sans],
       },
       colors: {
-        primary: colors.fuchsia,
+        primary: colors.pink,
         gray: colors.gray,
+        'accent-green': 'rgb(34 197 94)',
+        'accent-pink': colors.pink,
+      },
+      screens: {
+        '4k': '1980px',
       },
       typography: ({ theme }) => ({
         DEFAULT: {
