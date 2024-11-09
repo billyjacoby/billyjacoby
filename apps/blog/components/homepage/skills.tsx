@@ -5,7 +5,6 @@ import { skillsData } from '@/data/skills';
 import { skillsImage } from '@/lib/skill-image';
 
 function Skills() {
-  console.log('🪵 | skillsImage:', skillsImage('css'));
   return (
     <div
       id="skills"

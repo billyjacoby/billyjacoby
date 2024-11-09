@@ -1,14 +1,13 @@
 import headerNavLinks from '@/data/headerNavLinks';
 import Link from './Link';
 import MobileNav from './MobileNav';
-import ThemeSwitch from './ThemeSwitch';
 import SearchButton from './SearchButton';
-import React from 'react';
 import { SiteLogo } from './SiteLogo';
+import ThemeSwitch from './ThemeSwitch';
 
 const Header = () => {
   return (
-    <header className="bg-transparent">
+    <header className="bg-transparent print:invisible">
       <div className="flex items-center justify-between py-5">
         <div>
           <SiteLogo />

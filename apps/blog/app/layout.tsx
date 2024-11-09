@@ -3,16 +3,15 @@ import { Metadata } from 'next';
 import { Space_Grotesk } from 'next/font/google';
 import { ThemeProviders } from './theme-providers';
 
-import '../css/tailwind.css';
-import '../css/card.scss';
-import '../css/globals.scss';
 import Footer from '@/components/Footer';
+import Header from '@/components/Header';
+import ScrollToTop from '@/components/helper/scroll-to-top';
 import SectionContainer from '@/components/SectionContainer';
 import { Analytics, AnalyticsConfig } from 'pliny/analytics';
-import { SearchProvider, SearchConfig } from 'pliny/search';
-import ScrollToTop from '@/components/helper/scroll-to-top';
-import Navbar from '@/components/navbar';
-import Header from '@/components/Header';
+import { SearchConfig, SearchProvider } from 'pliny/search';
+import '../css/card.scss';
+import '../css/globals.scss';
+import '../css/tailwind.css';
 
 const space_grotesk = Space_Grotesk({
   subsets: ['latin'],

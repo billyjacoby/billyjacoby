@@ -1,14 +1,13 @@
-import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
-import { Card, CardHeader, CardContent } from '@/components/ui/card';
-import { Badge } from '@/components/ui/badge';
-import { Metadata } from 'next';
-import { Section } from '@/components/ui/section';
-import { GlobeIcon, MailIcon, PhoneIcon } from 'lucide-react';
-import { Button } from '@/components/ui/button';
-import { RESUME_DATA } from '@/data/resume-data';
 import { ProjectCard } from '@/components/resume/project-card';
+import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
+import { Badge } from '@/components/ui/badge';
+import { Button } from '@/components/ui/button';
+import { Card, CardContent, CardHeader } from '@/components/ui/card';
+import { Section } from '@/components/ui/section';
+import { RESUME_DATA } from '@/data/resume-data';
+import { GlobeIcon, MailIcon, PhoneIcon } from 'lucide-react';
+import { Metadata } from 'next';
 
-import Header from '@/components/Header';
 import { PrintButton } from '@/components/PrintButton';
 
 export const metadata: Metadata = {
@@ -20,7 +19,6 @@ export default function Page() {
   return (
     <main>
       <div className="print:hidden">
-        <Header />
         <PrintButton />
       </div>
       <div className="container relative mx-auto overflow-auto p-4 pt-0 md:p-16 md:pt-4 print:p-0">
