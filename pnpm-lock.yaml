@@ -187,6 +187,12 @@ importers:
         specifier: ^5.4.5
         version: 5.5.3
 
+  packages/doublet:
+    devDependencies:
+      typescript:
+        specifier: ^5.4.5
+        version: 5.5.3
+
   packages/eslint-config:
     dependencies:
       '@typescript-eslint/eslint-plugin':

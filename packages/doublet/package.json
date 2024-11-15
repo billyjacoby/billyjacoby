@@ -1,12 +1,13 @@
 {
-  "name": "doublet",
+  "name": "@billyjacoby/doublet",
   "version": "1.0.0",
   "description": "",
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
   "scripts": {
     "build": "tsc",
-    "publish": "pnpm run build && npm publish --access public"
+    "pre:publish": "pnpm build && npm publish --access public",
+    "publish:jsr": "npx jsr publish"
   },
   "keywords": [],
   "author": "",
