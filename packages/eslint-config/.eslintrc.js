@@ -1,92 +1,116 @@
-const internalPaths = ['@/*'];
+const internalPaths = ["@/*"];
 
 module.exports = {
   extends: [
-    'eslint:recommended',
-    'plugin:@typescript-eslint/recommended',
-    'plugin:tailwindcss/recommended',
-    'plugin:react/recommended',
-    'plugin:react-hooks/recommended',
-    'plugin:import/recommended',
-    'plugin:import/typescript',
+    "plugin:perfectionist/recommended-natural-legacy",
+    "plugin:prettier/recommended",
+    "plugin:@typescript-eslint/recommended",
+    "plugin:tailwindcss/recommended",
+    "plugin:import/recommended",
+    "plugin:import/typescript",
+    "eslint:recommended",
   ],
-  parser: '@typescript-eslint/parser',
-  plugins: ['react', 'react-hooks', 'tailwindcss'],
+  overrides: [
+    {
+      files: ["*.json"],
+      rules: {
+        "@typescript-eslint/no-unused-expressions": "off",
+      },
+    },
+    {
+			extends: ["plugin:package-json/recommended"],
+      rules: {
+				"package-json/valid-package-def": "off",
+			},
+			files: ["package.json"],
+			parser: "jsonc-eslint-parser",
+			plugins: ["package-json"],
+		},
+  ],
+  parser: "@typescript-eslint/parser",
+  plugins: ["tailwindcss", "perfectionist"],
   rules: {
-    'tailwindcss/no-custom-classname': 0,
-    'react/react-in-jsx-scope': 0,
-    'react/no-unescaped-entities': 1,
-    'import/no-unresolved': [
+    "@typescript-eslint/no-explicit-any": "warn",
+    "@typescript-eslint/no-shadow": "error",
+    "@typescript-eslint/no-unused-vars": [
+      "error",
+      {
+        argsIgnorePattern: "^_",
+        caughtErrorsIgnorePattern: "_",
+        varsIgnorePattern: "^_",
+      },
+    ],
+    camelcase: [0],
+    "import/no-unresolved": [
       2,
       {
-        ignore: [...internalPaths, '@env'],
+        ignore: [...internalPaths, "@env"],
       },
     ],
-    'import/order': [
-      'error',
+    "import/order": [
+      "error",
       {
         alphabetize: {
-          order: 'asc',
           caseInsensitive: true,
+          order: "asc",
         },
         groups: [
-          'builtin',
-          'external',
-          'internal',
-          'parent',
-          'sibling',
-          'index',
-          'object',
+          "builtin",
+          "external",
+          "internal",
+          "parent",
+          "sibling",
+          "index",
+          "object",
         ],
-        'newlines-between': 'always',
+        "newlines-between": "always",
         pathGroups: [
           {
-            pattern: '@env',
-            group: 'builtin',
+            group: "builtin",
+            pattern: "@env",
           },
           {
-            pattern: 'react',
-            group: 'builtin',
+            group: "builtin",
+            pattern: "react",
           },
           {
-            pattern: 'react-dom',
-            group: 'builtin',
+            group: "builtin",
+            pattern: "react-dom",
           },
-          { pattern: './*', group: 'internal' },
+          { group: "internal", pattern: "./*" },
           ...internalPaths.map((path) => ({
+            group: "internal",
             pattern: path,
-            group: 'internal',
           })),
         ],
-        pathGroupsExcludedImportTypes: ['react', 'react-dom'],
+        pathGroupsExcludedImportTypes: ["react", "react-dom"],
       },
     ],
-    quotes: ['warn', 'single', 'avoid-escape'],
-    '@typescript-eslint/no-explicit-any': 'warn',
-    // 'react/prop-types': 0,
-    camelcase: [0],
-    'no-console': [
-      'error',
+    "no-console": [
+      "error",
       {
-        allow: ['error'],
+        allow: ["error"],
       },
     ],
-    'sort-imports': [
-      'error',
+    "no-shadow": "off",
+    "no-unused-vars": "off",
+    "perfectionist/sort-imports": "off",
+    "perfectionist/sort-objects": [
+      "error",
+      {
+        type: "natural",
+      },
+    ],
+    quotes: ["warn", "double", "avoid-escape"],
+    "sort-imports": [
+      "error",
       {
         ignoreCase: true,
-        ignoreMemberSort: false,
         ignoreDeclarationSort: true,
+        ignoreMemberSort: false,
       },
     ],
-    'no-shadow': 'off',
-    '@typescript-eslint/no-shadow': 'error',
-    '@typescript-eslint/no-unused-vars': [
-      'error',
-      {
-        argsIgnorePattern: '^_',
-        varsIgnorePattern: '^_',
-      },
-    ],
+    "sort-keys": "off",
+    "tailwindcss/no-custom-classname": 0,
   },
 };
