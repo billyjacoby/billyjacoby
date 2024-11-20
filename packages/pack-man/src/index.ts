@@ -1,85 +1,105 @@
 #!/usr/bin/env node
+/* eslint-disable no-console */
 
-import { execSync } from 'node:child_process';
-import fs from 'node:fs';
-import path from 'node:path';
-type PackageManager = 'npm' | 'yarn' | 'pnpm' | 'bun';
+import { execSync } from "node:child_process";
+import { createHash } from "node:crypto";
+import fs from "node:fs";
+import path from "node:path";
+import process from "node:process";
+
+type PackageManager = "bun" | "npm" | "pnpm" | "yarn";
+
+const packageManagers: string[] = ["pnpm", "yarn", "bun", "npm"];
 
 interface PackageJson {
-	packageManager?: string;
-	[key: string]: unknown;
+  [key: string]: unknown;
+  packageManager?: string;
 }
-class PackageManagerUpdater {
-	private readonly lockFiles: Record<string, PackageManager> = {
-		'pnpm-lock.yaml': 'pnpm',
-		'yarn.lock': 'yarn',
-		'package-lock.json': 'npm',
-		'bun.lockb': 'bun',
-	};
 
-	private detectPackageManager(): string {
-		// Check for lock files
-		for (const [lockFile, manager] of Object.entries(this.lockFiles)) {
-			if (fs.existsSync(path.join(process.cwd(), lockFile))) {
-				return this.getPackageManagerVersion(manager);
-			}
-		}
+const LOCK_FILES: Record<string, PackageManager> = {
+  "bun.lockb": "bun",
+  "package-lock.json": "npm",
+  "pnpm-lock.yaml": "pnpm",
+  "yarn.lock": "yarn",
+};
 
-		// Fallback to checking binary presence
-		const managers: PackageManager[] = ['pnpm', 'yarn', 'bun', 'npm'];
-		for (const manager of managers) {
-			try {
-				return this.getPackageManagerVersion(manager);
-			} catch {}
-		}
+function getPackageManagerVersion(manager: PackageManager): string {
+  try {
+    const version = execSync(`${manager} --version`).toString().trim();
+    const buffer = Buffer.from(
+      execSync(`npm show ${manager}@${version} dist.shasum`),
+    )
+      .toString()
+      .trim();
+    const hash = createHash("sha512").update(buffer).digest("hex");
 
-		// Default to npm
-		return this.getPackageManagerVersion('npm');
-	}
+    console.log("🪵 | getPackageManagerVersion | hash:", hash);
+    return `${manager}@${version}+sha512.${hash}`;
+  } catch (error) {
+    console.error(`Error getting ${manager} version:`, error);
+    return `${manager}@unknown`;
+  }
+}
 
-	private getPackageManagerVersion(manager: PackageManager): string {
-		try {
-			const version = execSync(`${manager} --version`).toString().trim();
-			return `${manager}@${version}`;
-		} catch (error) {
-			console.error(`Error getting ${manager} version:`, error);
-			return `${manager}@unknown`;
-		}
-	}
+function detectPackageManager(): string {
+  // Check for lock files
+  const npm_config_user_agent =
+    process.env.npm_config_user_agent?.split("/")[0];
 
-	private readPackageJson(): PackageJson {
-		const packageJsonPath = path.join(process.cwd(), 'package.json');
+  if (
+    npm_config_user_agent &&
+    packageManagers.includes(npm_config_user_agent)
+  ) {
+    return getPackageManagerVersion(npm_config_user_agent as PackageManager);
+  }
 
-		try {
-			return JSON.parse(fs.readFileSync(packageJsonPath, 'utf8'));
-		} catch (error) {
-			console.error('Error reading package.json:', error);
-			process.exit(1);
-		}
-	}
+  for (const [lockFile, manager] of Object.entries(LOCK_FILES)) {
+    if (fs.existsSync(path.join(process.cwd(), lockFile))) {
+      return getPackageManagerVersion(manager);
+    }
+  }
 
-	private writePackageJson(packageJson: PackageJson): void {
-		const packageJsonPath = path.join(process.cwd(), 'package.json');
+  // Fallback to checking binary presence
+  const managers: PackageManager[] = ["pnpm", "yarn", "bun", "npm"];
+  for (const manager of managers) {
+    return getPackageManagerVersion(manager);
+  }
 
-		try {
-			fs.writeFileSync(packageJsonPath, JSON.stringify(packageJson, null, 2));
-			console.log(`Updated packageManager to: ${packageJson.packageManager}`);
-		} catch (error) {
-			console.error('Error writing package.json:', error);
-			process.exit(1);
-		}
-	}
+  // Default to npm
+  return getPackageManagerVersion("npm");
+}
 
-	public updatePackageManagerField(): void {
-		const packageJson = this.readPackageJson();
-		const detectedPackageManager = this.detectPackageManager();
+function readPackageJson(): PackageJson {
+  const packageJsonPath = path.join(process.cwd(), "package.json");
 
-		packageJson.packageManager = detectedPackageManager;
+  try {
+    return JSON.parse(fs.readFileSync(packageJsonPath, "utf8"));
+  } catch (error) {
+    console.error("Error reading package.json:", error);
+    process.exit(1);
+  }
+}
 
-		this.writePackageJson(packageJson);
-	}
+function writePackageJson(packageJson: PackageJson): void {
+  const packageJsonPath = path.join(process.cwd(), "package.json");
+
+  try {
+    fs.writeFileSync(packageJsonPath, JSON.stringify(packageJson, null, 2));
+    console.log(`Updated packageManager to: ${packageJson.packageManager}`);
+  } catch (error) {
+    console.error("Error writing package.json:", error);
+    process.exit(1);
+  }
+}
+
+function updatePackageManagerField(): void {
+  const packageJson = readPackageJson();
+  const detectedPackageManager = detectPackageManager();
+
+  packageJson.packageManager = detectedPackageManager;
+
+  writePackageJson(packageJson);
 }
 
 // Run the update
-const updater = new PackageManagerUpdater();
-updater.updatePackageManagerField();
+updatePackageManagerField();

@@ -1,0 +1,6 @@
+{
+	"extends": ["@billyjacoby/eslint-config"],
+	"env": {
+		"node": true
+	}
+}
