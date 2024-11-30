@@ -1,0 +1,23 @@
+{
+  "name": "@billyjacoby/geoip",
+  "type": "module",
+  "scripts": {
+    "dev": "dotenv -e .env tsx watch src/index.ts",
+    "build": "tsup --config ./tsup.config.ts",
+    "start": "dotenv -e .env node dist/index.cjs",
+    "geoip-setup": "cd node_modules/geoip-lite && npm run-script updatedb license_key=$MAXMIND_LICENSE_KEY"
+  },
+  "dependencies": {
+    "@hono/node-server": "^1.13.7",
+    "dotenv-cli": "^7.4.4",
+    "geoip-lite": "^1.4.10",
+    "hono": "^4.6.12"
+  },
+  "devDependencies": {
+    "@types/geoip-lite": "^1.4.4",
+    "@types/node": "^20.11.17",
+    "tsup": "^8.3.5",
+    "tsx": "^4.7.1",
+    "typescript": "^5"
+  }
+}
