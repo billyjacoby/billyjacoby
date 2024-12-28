@@ -1,5 +1,6 @@
 const internalPaths = ["@/*"];
 
+// eslint-disable-next-line no-undef
 module.exports = {
   extends: [
     "plugin:perfectionist/recommended-natural-legacy",
@@ -18,14 +19,14 @@ module.exports = {
       },
     },
     {
-			extends: ["plugin:package-json/recommended"],
+      extends: ["plugin:package-json/recommended"],
+      files: ["package.json"],
+      parser: "jsonc-eslint-parser",
+      plugins: ["package-json"],
       rules: {
-				"package-json/valid-package-def": "off",
-			},
-			files: ["package.json"],
-			parser: "jsonc-eslint-parser",
-			plugins: ["package-json"],
-		},
+        "package-json/valid-package-def": "off",
+      },
+    },
   ],
   parser: "@typescript-eslint/parser",
   plugins: ["tailwindcss", "perfectionist"],
