@@ -1,6 +1,9 @@
 'use client';
 import React from 'react';
 import { useTheme } from 'next-themes';
+import { wrapApiHandler } from 'next/dist/server/api-utils';
+
+const TOGGLE_DISABLED = true;
 
 const ThemeSwitch = () => {
   const { theme, setTheme, resolvedTheme } = useTheme();
@@ -9,9 +12,16 @@ const ThemeSwitch = () => {
   // When mounted on client, now we can show the UI
   React.useEffect(() => setMounted(true), []);
 
+  React.useEffect(() => {
+    console.log(theme);
+    if (theme !== 'dark') setTheme('dark');
+  }, [theme, setTheme]);
+
   if (!mounted) {
     return <span className="h-6 w-6" />;
   }
+
+  if (TOGGLE_DISABLED) return null;
 
   return (
     <button
