@@ -1,7 +1,7 @@
-import { ReactNode } from 'react';
-import type { Authors } from 'contentlayer/generated';
-import SocialIcon from '@/components/social-icons';
 import Image from '@/components/Image';
+import SocialIcon from '@/components/social-icons';
+import type { Authors } from 'contentlayer/generated';
+import { ReactNode } from 'react';
 
 interface Props {
   children: ReactNode;
@@ -18,6 +18,7 @@ export default function AuthorLayout({ children, content }: Props) {
     twitter,
     linkedin,
     github,
+    bluesky,
   } = content;
 
   return (
@@ -51,6 +52,7 @@ export default function AuthorLayout({ children, content }: Props) {
               <SocialIcon kind="github" href={github} />
               <SocialIcon kind="linkedin" href={linkedin} />
               <SocialIcon kind="twitter" href={twitter} />
+              <SocialIcon kind="bluesky" href={bluesky} />
             </div>
           </div>
           <div className="prose max-w-none pb-8 pt-8 dark:prose-invert xl:col-span-2">

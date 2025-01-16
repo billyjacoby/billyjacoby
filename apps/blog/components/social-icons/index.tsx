@@ -1,11 +1,12 @@
 import {
-  Mail,
-  Github,
+  Bluesky,
   Facebook,
-  Youtube,
+  Github,
   Linkedin,
-  Twitter,
+  Mail,
   Mastodon,
+  Twitter,
+  Youtube,
 } from './icons';
 
 const components = {
@@ -16,6 +17,7 @@ const components = {
   linkedin: Linkedin,
   twitter: Twitter,
   mastodon: Mastodon,
+  bluesky: Bluesky,
 };
 
 type SocialIconProps = {

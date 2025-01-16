@@ -1,14 +1,14 @@
-import { ReactNode } from 'react';
-import { CoreContent } from 'pliny/utils/contentlayer';
-import type { Blog, Authors } from 'contentlayer/generated';
 import Comments from '@/components/Comments';
+import Image from '@/components/Image';
 import Link from '@/components/Link';
 import PageTitle from '@/components/PageTitle';
+import ScrollTopAndComment from '@/components/ScrollTopAndComment';
 import SectionContainer from '@/components/SectionContainer';
-import Image from '@/components/Image';
 import Tag from '@/components/Tag';
 import siteMetadata from '@/data/siteMetadata';
-import ScrollTopAndComment from '@/components/ScrollTopAndComment';
+import type { Authors, Blog } from 'contentlayer/generated';
+import { CoreContent } from 'pliny/utils/contentlayer';
+import { ReactNode } from 'react';
 
 const editUrl = (path) => `${siteMetadata.siteRepo}/blob/main/data/${path}`;
 const discussUrl = (path) =>
@@ -101,6 +101,20 @@ export default function PostLayout({
                         <dd className="text-gray-900 dark:text-gray-100">
                           {author.name}
                         </dd>
+                        <dt className="sr-only">Bluesky</dt>
+                        <dd>
+                          {author.bluesky && (
+                            <Link
+                              href={author.bluesky}
+                              className="text-primary-500 hover:text-primary-600 dark:hover:text-primary-400"
+                            >
+                              {author.bluesky.replace(
+                                'https://bsky.app/profile/',
+                                'bsky: @'
+                              )}
+                            </Link>
+                          )}
+                        </dd>
                         <dt className="sr-only">Twitter</dt>
                         <dd>
                           {author.twitter && (
@@ -108,10 +122,7 @@ export default function PostLayout({
                               href={author.twitter}
                               className="text-primary-500 hover:text-primary-600 dark:hover:text-primary-400"
                             >
-                              {author.twitter.replace(
-                                'https://twitter.com/',
-                                '@'
-                              )}
+                              {author.twitter.replace('https://x.com/', 'X: @')}
                             </Link>
                           )}
                         </dd>

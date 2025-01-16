@@ -8,6 +8,7 @@ export const personalData = {
   address: 'Brodheadsville, PA USA ',
   github: 'https://github.com/billyjacoby',
   linkedIn: 'https://www.linkedin.com/in/billyjacoby/',
-  twitter: 'https://twitter.com/billyjacobu',
+  twitter: 'https://twitter.com/billyjacoby',
+  bluesky: 'https://bsky.app/profile/billyjaco.by',
   devUsername: 'billyjacoby',
 };
