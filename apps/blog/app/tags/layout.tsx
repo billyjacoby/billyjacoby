@@ -1,9 +1,9 @@
-import MainLayout from '@/layouts/MainLayout';
+import div from '@/layouts/MainLayout';
 
 export default function RootLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
-  return <MainLayout>{children}</MainLayout>;
+  return <div>{children}</div>;
 }
