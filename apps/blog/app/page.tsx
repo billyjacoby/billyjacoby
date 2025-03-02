@@ -5,13 +5,12 @@ import HeroSection from '@/components/homepage/hero-section';
 import Projects from '@/components/homepage/projects';
 
 import Skills from '@/components/homepage/skills';
-import { allBlogs } from 'contentlayer/generated';
-import { allCoreContent, sortPosts } from 'pliny/utils/contentlayer';
+import postData from 'data/post-data.json';
+
+export const dynamic = 'force-dynamic';
 
 export default async function Home() {
-  const posts = allCoreContent(sortPosts(allBlogs)).filter(
-    (b) => b?.draft !== true
-  );
+  const posts = postData.filter((b) => b?.draft !== true);
 
   return (
     <div>

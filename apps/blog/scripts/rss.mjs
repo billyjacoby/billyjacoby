@@ -1,11 +1,11 @@
-import { writeFileSync, mkdirSync } from 'fs';
-import path from 'path';
+import { mkdirSync, writeFileSync } from 'fs';
 import GithubSlugger from 'github-slugger';
-import { escape } from 'pliny/utils/htmlEscaper.js';
-import siteMetadata from '../data/siteMetadata.js';
-import tagData from '../app/tag-data.json' assert { type: 'json' };
-import { allBlogs } from '../.contentlayer/generated/index.mjs';
+import path from 'path';
 import { sortPosts } from 'pliny/utils/contentlayer.js';
+import { escape } from 'pliny/utils/htmlEscaper.js';
+import tagData from '../app/tag-data.json' with { type: 'json' };
+import postData from '../data/post-data.json' with { type: 'json' };
+import siteMetadata from '../data/siteMetadata.js';
 
 const generateRssItem = (config, post) => `
   <item>
@@ -38,7 +38,7 @@ const generateRss = (config, posts, page = 'feed.xml') => `
 `;
 
 async function generateRSS(config, allBlogs, page = 'feed.xml') {
-  const publishPosts = allBlogs.filter((post) => post.draft !== true);
+  const publishPosts = postData.filter((post) => post.draft !== true);
   // RSS for blog post
   if (publishPosts.length > 0) {
     const rss = generateRss(config, sortPosts(publishPosts));
@@ -59,7 +59,7 @@ async function generateRSS(config, allBlogs, page = 'feed.xml') {
 }
 
 const rss = () => {
-  generateRSS(siteMetadata, allBlogs);
+  generateRSS(siteMetadata, postData);
   console.log('RSS feed generated...');
 };
 export default rss;

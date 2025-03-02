@@ -1,11 +1,19 @@
 import Image from '@/components/Image';
 import SocialIcon from '@/components/social-icons';
-import type { Authors } from 'contentlayer/generated';
 import { ReactNode } from 'react';
 
 interface Props {
   children: ReactNode;
-  content: Omit<Authors, '_id' | '_raw' | 'body'>;
+  content: {
+    name: string;
+    avatar: string;
+    occupation: string;
+    email: string;
+    twitter: string;
+    linkedin: string;
+    github: string;
+    bluesky: string;
+  };
 }
 
 export default function AuthorLayout({ children, content }: Props) {
@@ -13,7 +21,6 @@ export default function AuthorLayout({ children, content }: Props) {
     name,
     avatar,
     occupation,
-    company,
     email,
     twitter,
     linkedin,
@@ -46,7 +53,6 @@ export default function AuthorLayout({ children, content }: Props) {
             <div className="text-center text-gray-500 dark:text-gray-400">
               {occupation}
             </div>
-            <div className="text-gray-500 dark:text-gray-400">{company}</div>
             <div className="flex space-x-3 pt-6">
               <SocialIcon kind="mail" href={`mailto:${email}`} />
               <SocialIcon kind="github" href={github} />

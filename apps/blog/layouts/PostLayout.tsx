@@ -1,4 +1,4 @@
-import Comments from '@/components/Comments';
+import { ClientPostComponents } from '@/components/ClientPostComponents';
 import Image from '@/components/Image';
 import Link from '@/components/Link';
 import PageTitle from '@/components/PageTitle';
@@ -6,15 +6,7 @@ import ScrollTopAndComment from '@/components/ScrollTopAndComment';
 import SectionContainer from '@/components/SectionContainer';
 import Tag from '@/components/Tag';
 import siteMetadata from '@/data/siteMetadata';
-import type { Authors, Blog } from 'contentlayer/generated';
-import { CoreContent } from 'pliny/utils/contentlayer';
 import { ReactNode } from 'react';
-
-const editUrl = (path) => `${siteMetadata.siteRepo}/blob/main/data/${path}`;
-const discussUrl = (path) =>
-  `https://mobile.twitter.com/search?q=${encodeURIComponent(
-    `${siteMetadata.siteUrl}/${path}`
-  )}`;
 
 const postDateTemplate: Intl.DateTimeFormatOptions = {
   weekday: 'long',
@@ -24,22 +16,33 @@ const postDateTemplate: Intl.DateTimeFormatOptions = {
 };
 
 interface LayoutProps {
-  content: CoreContent<Blog>;
-  authorDetails: CoreContent<Authors>[];
+  // content: CoreContent<Blog>;
+  authorDetails: {
+    name: string;
+    avatar: string;
+    twitter: string;
+    bluesky: string;
+  }[];
   next?: { path: string; title: string };
   prev?: { path: string; title: string };
   children: ReactNode;
+  date: string;
+  lastmod: string;
+  title: string;
+  tags: string[];
 }
 
-export default function PostLayout({
-  content,
+export default async function PostLayout({
+  date,
+  lastmod,
+  title,
+  tags,
   authorDetails,
   next,
   prev,
   children,
 }: LayoutProps) {
-  const { filePath, path, slug, date, title, tags, lastmod } = content;
-  const basePath = path.split('/')[0];
+  // const basePath = path.split('/')[0];
 
   return (
     <SectionContainer>
@@ -132,26 +135,8 @@ export default function PostLayout({
                 </ul>
               </dd>
             </dl>
-            <div className="divide-y divide-gray-200 dark:divide-gray-700 xl:col-span-3 xl:row-span-2 xl:pb-0">
-              <div className="prose max-w-none pb-8 pt-10 dark:prose-invert">
-                {children}
-              </div>
-              <div className="pb-6 pt-6 text-center text-sm text-gray-700 dark:text-gray-300">
-                {/* <Link href={discussUrl(path)} rel="nofollow">
-                  Discuss on Twitter
-                </Link>
-                {` • `} */}
-                <Link href={editUrl(filePath)}>View on GitHub</Link>
-              </div>
-              {siteMetadata.comments && (
-                <div
-                  className="pb-6 pt-6 text-center text-gray-700 dark:text-gray-300"
-                  id="comment"
-                >
-                  <Comments slug={slug} />
-                </div>
-              )}
-            </div>
+            <ClientPostComponents>{children}</ClientPostComponents>
+
             <footer>
               <div className="divide-gray-200 text-sm font-medium leading-5 dark:divide-gray-700 xl:col-start-1 xl:row-start-2 xl:divide-y">
                 {tags && (
@@ -193,7 +178,8 @@ export default function PostLayout({
               </div>
               <div className="pt-4 xl:pt-8">
                 <Link
-                  href={`/${basePath}`}
+                  // href={`/${basePath}`}
+                  href="/blog"
                   className="text-primary-500 hover:text-primary-600 dark:hover:text-primary-400"
                   aria-label="Back to the blog"
                 >

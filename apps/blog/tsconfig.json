@@ -22,8 +22,7 @@
       "@/layouts/*": ["layouts/*"],
       "@/css/*": ["css/*"],
       "@/lib/*": ["lib/*"],
-      "@/public/*": ["./public/*"],
-      "contentlayer/generated": ["./.contentlayer/generated"]
+      "@/public/*": ["./public/*"]
     },
     "plugins": [
       {
@@ -39,8 +38,6 @@
     "**/*.ts",
     "**/*.tsx",
     "**/*.json",
-    ".contentlayer/generated",
-    ".contentlayer/generated/**/*.json",
     ".next/types/**/*.ts"
   ],
   "exclude": ["node_modules"]
