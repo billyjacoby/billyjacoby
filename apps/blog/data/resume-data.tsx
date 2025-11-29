@@ -36,22 +36,24 @@ export const RESUME_DATA = {
       },
     ],
   },
-  // education: [
-  //   {
-  //     school: 'Palm Beach State College',
-  //     degree: "Associate's Degree in Computer Science",
-  //     start: '2018',
-  //     end: '2020',
-  //   },
-  // ],
   work: [
+    {
+      company: 'Injective Labs',
+      link: 'https://injective.com',
+      badges: ['Remote'],
+      title: 'Head of Mobile Development',
+      start: 'Sept 2024',
+      end: 'Now',
+      description:
+        'Leading mobile development initiatives at Injective Labs, focusing on building and scaling decentralized finance (DeFi) applications. Responsible for architecting and developing mobile solutions that interface with the Injective blockchain and ensuring delivery of high-quality, secure financial applications.',
+    },
     {
       company: '28 Wellness',
       link: 'https://28.co',
       badges: ['Remote'],
       title: 'Technical Lead -> Head of Engineering',
-      start: '2023',
-      end: 'Now',
+      start: 'June 2023',
+      end: 'Sept 2024',
       description:
         'Primary in house engineer for a fast growing health tech startup. Grew technical infrastructure to support increase from 50k MAU to over 500k MAU in a few months. Responsible for translating all product ideas and business decisions into technical projects, and also carrying out a number of these projects from start to finish. Managed a combined team of in house engineers and contractors.',
     },
@@ -60,8 +62,8 @@ export const RESUME_DATA = {
       link: 'https://twitter.com/frontrunnerxyz?lang=en',
       badges: ['Remote'],
       title: 'Software Engineer → Senior Software Engineer',
-      start: '2022',
-      end: '2023',
+      start: 'Jan 2022',
+      end: 'June 2023',
       description:
         "Led the Frontend team in developing the company's web application and native mobile apps. The project was architected and developed from ideation to delivery under my guidance, leveraging deep technical knowledge and experience in frontend development. Ensure team’s priorities stay aligned with the company’s direction and on track for timely completion.",
     },

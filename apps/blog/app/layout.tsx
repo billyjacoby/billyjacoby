@@ -9,6 +9,8 @@ import ScrollToTop from '@/components/helper/scroll-to-top';
 import SectionContainer from '@/components/SectionContainer';
 import { Analytics, AnalyticsConfig } from 'pliny/analytics';
 import { SearchConfig, SearchProvider } from 'pliny/search';
+import { Analytics as VercelAnalytics } from '@vercel/analytics/next';
+
 import '../css/card.scss';
 import '../css/globals.scss';
 import '../css/tailwind.css';
@@ -70,6 +72,7 @@ export default function RootLayout({
       className={`${space_grotesk.variable} scroll-smooth`}
       suppressHydrationWarning
     >
+      <VercelAnalytics />
       <link
         rel="apple-touch-icon"
         sizes="76x76"
