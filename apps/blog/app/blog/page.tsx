@@ -1,16 +1,20 @@
 import ListLayout from '@/layouts/ListLayoutWithTags';
-import { allCoreContent, sortPosts } from 'pliny/utils/contentlayer';
-import { allBlogs } from 'contentlayer/generated';
 import { genPageMetadata } from 'app/seo';
+import postData from 'data/post-data.json';
 
 const POSTS_PER_PAGE = 5;
 
 export const metadata = genPageMetadata({ title: 'Blog' });
 
-export default function BlogPage() {
-  const posts = allCoreContent(sortPosts(allBlogs)).filter(
-    (b) => b?.draft !== true
-  );
+export default async function BlogPage() {
+  const posts = postData
+    .filter((b) => b?.draft !== true)
+    .sort((a, b) => {
+      return (
+        new Date(b.lastmod ?? b.date).getTime() -
+        new Date(a.lastmod ?? a.date).getTime()
+      );
+    });
   const pageNumber = 1;
   const initialDisplayPosts = posts.slice(
     POSTS_PER_PAGE * (pageNumber - 1),

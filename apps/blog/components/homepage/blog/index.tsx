@@ -1,12 +1,17 @@
-// @flow strict
 import Link from 'next/link';
-// import { FaArrowRight } from 'react-icons/fa';
 
 import BlogCard from './blog-card';
-import { CoreContent } from 'pliny/utils/contentlayer';
-import { Blog } from 'contentlayer/generated';
 
-function BlogPage({ blogs }: { blogs: CoreContent<Blog>[] }) {
+function BlogPage({
+  blogs,
+}: {
+  blogs: {
+    title: string;
+    summary: string;
+    date: string;
+    slug: string;
+  }[];
+}) {
   return (
     <div
       id="blogs"

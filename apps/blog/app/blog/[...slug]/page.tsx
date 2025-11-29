@@ -1,64 +1,67 @@
-import 'css/prism.css';
-import 'katex/dist/katex.css';
-
-import PageTitle from '@/components/PageTitle';
-import { components } from '@/components/MDXComponents';
-import { MDXLayoutRenderer } from 'pliny/mdx-components';
-import {
-  sortPosts,
-  coreContent,
-  allCoreContent,
-} from 'pliny/utils/contentlayer';
-import { allBlogs, allAuthors } from 'contentlayer/generated';
-import type { Authors, Blog } from 'contentlayer/generated';
-import PostSimple from '@/layouts/PostSimple';
-import PostLayout from '@/layouts/PostLayout';
-import PostBanner from '@/layouts/PostBanner';
-import { Metadata } from 'next';
 import siteMetadata from '@/data/siteMetadata';
+import PostLayout from '@/layouts/PostLayout';
+import { POSTS_FOLDER } from '@/lib/constants';
+import { access, readFile } from 'fs/promises';
+import { compileMDX } from 'next-mdx-remote/rsc';
+import { notFound } from 'next/navigation';
+import path from 'path';
 
-const defaultLayout = 'PostLayout';
-const layouts = {
-  PostSimple,
-  PostLayout,
-  PostBanner,
-};
+async function readPostFile(slug: string) {
+  const filePath = path.resolve(path.join(POSTS_FOLDER, `${slug}.mdx`));
+
+  try {
+    await access(filePath);
+  } catch (err) {
+    return null;
+  }
+
+  const fileContent = await readFile(filePath, { encoding: 'utf8' });
+  return fileContent;
+}
 
 export async function generateMetadata({
   params,
 }: {
-  params: { slug: string[] };
-}): Promise<Metadata | undefined> {
-  const slug = decodeURI(params.slug.join('/'));
-  const post = allBlogs.find((p) => p.slug === slug);
-  const authorList = post?.authors || ['default'];
-  const authorDetails = authorList.map((author) => {
-    const authorResults = allAuthors.find((p) => p.slug === author);
-    return coreContent(authorResults as Authors);
-  });
-  if (!post) {
+  params: Promise<{ slug: string[] }>;
+}) {
+  const { slug } = await params;
+  console.log('🪵 | slug:', slug);
+  const markdown = await readPostFile(slug.join('/'));
+  console.log('🪵 | markdown:', markdown);
+
+  if (!markdown) {
     return;
   }
 
-  const modifiedAt = new Date(post.lastmod || post.date).toISOString();
+  const { frontmatter, content } = await compileMDX<{
+    title: string;
+    date: string;
+    lastmod: string;
+    tags: string[];
+  }>({
+    source: markdown,
+    options: { parseFrontmatter: true },
+  });
+
+  const modifiedAt = new Date(
+    frontmatter.lastmod || frontmatter.date
+  ).toISOString();
   const publishedAt = modifiedAt;
-  const authors = authorDetails.map((author) => author.name);
-  let imageList = [siteMetadata.socialBanner];
-  if (post.images) {
-    imageList = typeof post.images === 'string' ? [post.images] : post.images;
-  }
+  const imageList = [siteMetadata.socialBanner];
   const ogImages = imageList.map((img) => {
     return {
       url: img.includes('http') ? img : siteMetadata.siteUrl + img,
     };
   });
 
+  // TODO: get a summary here somehow
+
   return {
-    title: post.title,
-    description: post.summary,
+    title: frontmatter.title,
+    // description: frontmatter.summary,
     openGraph: {
-      title: post.title,
-      description: post.summary,
+      title: frontmatter.title,
+      // description: frontmatter.summary,
       siteName: siteMetadata.title,
       locale: 'en_US',
       type: 'article',
@@ -66,78 +69,55 @@ export async function generateMetadata({
       modifiedTime: modifiedAt,
       url: './',
       images: ogImages,
-      authors: authors.length > 0 ? authors : [siteMetadata.author],
+      authors: [siteMetadata.author],
+      // authors: authors.length > 0 ? authors : [siteMetadata.author],
     },
     twitter: {
       card: 'summary_large_image',
-      title: post.title,
-      description: post.summary,
+      title: frontmatter.title,
+      // description: frontmatter.summary,
       images: imageList,
     },
   };
 }
+export default async function PostPage({
+  params,
+}: {
+  params: Promise<{ slug: string[] }>;
+}) {
+  const { slug } = await params;
+  const markdown = await readPostFile(slug.join('/'));
 
-export const generateStaticParams = async () => {
-  const paths = allBlogs.map((p) => ({ slug: p.slug.split('/') }));
-
-  return paths;
-};
-
-export default async function Page({ params }: { params: { slug: string[] } }) {
-  const slug = decodeURI(params.slug.join('/'));
-  // Filter out drafts in production
-  const sortedCoreContents = allCoreContent(sortPosts(allBlogs));
-  const postIndex = sortedCoreContents.findIndex((p) => p.slug === slug);
-  if (postIndex === -1) {
-    return (
-      <div className="mt-24 text-center">
-        <PageTitle>
-          Under Construction{' '}
-          <span role="img" aria-label="roadwork sign">
-            🚧
-          </span>
-        </PageTitle>
-      </div>
-    );
+  if (!markdown) {
+    notFound();
   }
 
-  const prev = sortedCoreContents[postIndex + 1];
-  const next = sortedCoreContents[postIndex - 1];
-  const post = allBlogs.find((p) => p.slug === slug) as Blog;
-  const authorList = post?.authors || ['default'];
-  const authorDetails = authorList.map((author) => {
-    const authorResults = allAuthors.find((p) => p.slug === author);
-    return coreContent(authorResults as Authors);
+  const { content, frontmatter } = await compileMDX<{
+    title: string;
+    date: string;
+    lastmod: string;
+    tags: string[];
+  }>({
+    source: markdown,
+    options: { parseFrontmatter: true },
   });
-  const mainContent = coreContent(post);
-  const jsonLd = post.structuredData;
-  jsonLd['author'] = authorDetails.map((author) => {
-    return {
-      '@type': 'Person',
-      name: author.name,
-    };
-  });
-
-  const Layout = layouts[post.layout || defaultLayout];
 
   return (
-    <>
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
-      />
-      <Layout
-        content={mainContent}
-        authorDetails={authorDetails}
-        next={next}
-        prev={prev}
-      >
-        <MDXLayoutRenderer
-          code={post.body.code}
-          components={components}
-          toc={post.toc}
-        />
-      </Layout>
-    </>
+    <PostLayout
+      authorDetails={[
+        {
+          name: 'Billy Jacoby',
+          avatar: '/static/images/billy-avatar.png',
+          twitter: 'https://x.com/billyjacoby',
+          bluesky: 'https://bsky.app/profile/billyjaco.by',
+        },
+      ]}
+      date={frontmatter.date}
+      lastmod={frontmatter.lastmod}
+      title={frontmatter.title}
+      tags={frontmatter.tags}
+    >
+      {content}
+    </PostLayout>
   );
 }

@@ -1,24 +1,23 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 'use client';
 
-import { usePathname } from 'next/navigation';
-import { slug } from 'github-slugger';
-import { formatDate } from 'pliny/utils/formatDate';
-import { CoreContent } from 'pliny/utils/contentlayer';
-import type { Blog } from 'contentlayer/generated';
 import Link from '@/components/Link';
 import Tag from '@/components/Tag';
 import siteMetadata from '@/data/siteMetadata';
 import tagData from 'app/tag-data.json';
+import { slug } from 'github-slugger';
+import { usePathname } from 'next/navigation';
+import { formatDate } from 'pliny/utils/formatDate';
+import { PostData } from 'types/post';
 
 interface PaginationProps {
   totalPages: number;
   currentPage: number;
 }
 interface ListLayoutProps {
-  posts: CoreContent<Blog>[];
+  posts: PostData[];
   title: string;
-  initialDisplayPosts?: CoreContent<Blog>[];
+  initialDisplayPosts?: PostData[];
   pagination?: PaginationProps;
 }
 
@@ -135,9 +134,9 @@ export default function ListLayoutWithTags({
           <div>
             <ul>
               {displayPosts.map((post) => {
-                const { path, date, title, summary, tags } = post;
+                const { date, title, summary, tags, slug } = post;
                 return (
-                  <li key={path} className="py-5">
+                  <li key={slug} className="py-5">
                     <article className="flex flex-col space-y-2 xl:space-y-0">
                       <dl>
                         <dt className="sr-only">Published on</dt>
@@ -151,7 +150,7 @@ export default function ListLayoutWithTags({
                         <div>
                           <h2 className="text-2xl font-bold leading-8 tracking-tight">
                             <Link
-                              href={`/${path}`}
+                              href={`/blog/${slug}`}
                               className="text-gray-900 dark:text-gray-100"
                             >
                               {title}

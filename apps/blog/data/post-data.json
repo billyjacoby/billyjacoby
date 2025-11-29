@@ -1,0 +1,134 @@
+[
+  {
+    "title": "How to clone a VM in Proxmox",
+    "date": "2020-05-27",
+    "lastmod": "2021-06-27",
+    "tags": [
+      "linux",
+      "devops"
+    ],
+    "draft": false,
+    "summary": "Step by step instructions for how to clone a VM in Proxmox",
+    "canonicalUrl": "https://billyjacoby.com/clone-vm-proxmox",
+    "slug": "clone-vm-proxmox"
+  },
+  {
+    "title": "Creating a Garage for my Roomba",
+    "date": "2020-11-07",
+    "tags": [
+      "arduino",
+      "hardware",
+      "3d printing"
+    ],
+    "draft": false,
+    "summary": "Building a hidden garage for my robot vacuum cleaner",
+    "slug": "creating-a-garage-for-my-roomba"
+  },
+  {
+    "title": "How to use tRPC types outside of a monorepo",
+    "date": "2023-11-15",
+    "tags": [
+      "webdev",
+      "tutorial"
+    ],
+    "draft": false,
+    "summary": "This article provides a tutorial on how to use tRPC outside of a monorepo. It covers setting up a tRPC repo, exporting the types as an npm package, and consuming these types in another repository.",
+    "slug": "export-trpc-types"
+  },
+  {
+    "title": "Building a GatsbyJS Theme - Introduction",
+    "date": "2019-05-05",
+    "tags": [
+      "webdev"
+    ],
+    "draft": false,
+    "summary": "Introduction to creating your own GatsbyJS theme.",
+    "slug": "gatsby-theme/introduction"
+  },
+  {
+    "title": "Building a GatsbyJS Theme - Part One",
+    "date": "2019-05-12",
+    "tags": [
+      "webdev"
+    ],
+    "draft": false,
+    "summary": "This is the first part in a multi-part tutorial series on building your own Gatsby theme from scratch.",
+    "slug": "gatsby-theme/part-one"
+  },
+  {
+    "title": "Building a GatsbyJS Theme - Part Three",
+    "date": "2019-11-21",
+    "tags": [
+      "webdev"
+    ],
+    "draft": false,
+    "summary": "This is part three in a multi-part tutorial series on building your own Gatsby theme from scratch.",
+    "slug": "gatsby-theme/part-three"
+  },
+  {
+    "title": "Building a GatsbyJS Theme - Part Two",
+    "date": "2019-05-25",
+    "tags": [
+      "webdev"
+    ],
+    "draft": false,
+    "summary": "This is part two in a multi-part tutorial series on building your own Gatsby theme from scratch.",
+    "slug": "gatsby-theme/part-two"
+  },
+  {
+    "title": "Greensock Animations using React Hooks",
+    "date": "2019-04-20",
+    "tags": [
+      "webdev",
+      "react",
+      "tutorial"
+    ],
+    "draft": false,
+    "summary": "How to use Greensock Animations with React and hooks.",
+    "slug": "gsap-with-react"
+  },
+  {
+    "title": "How to expand the disk on a Ubuntu VM",
+    "date": "2020-05-20",
+    "tags": [
+      "linux",
+      "devops"
+    ],
+    "draft": false,
+    "summary": "Learn how to expand the disk on a debian based virtual machine.",
+    "slug": "how-to-expand-the-disk-on-a-ubuntu-vm"
+  },
+  {
+    "title": "IntersectionObserver API with React Hooks",
+    "date": "2019-04-23",
+    "tags": [
+      "webdev",
+      "react",
+      "tutorial"
+    ],
+    "draft": false,
+    "summary": "Learn to use the IntersectionObserver API with React hooks.",
+    "slug": "intersectionobserver-api-with-react-hooks"
+  },
+  {
+    "title": "TEMPLATE",
+    "date": "2020-05-27",
+    "tags": [
+      "linux",
+      "devops"
+    ],
+    "draft": true,
+    "summary": "SUMMARY",
+    "slug": "template"
+  },
+  {
+    "title": "What is HTML Canvas",
+    "date": "2020-03-04",
+    "tags": [
+      "webdev"
+    ],
+    "draft": false,
+    "summary": "Not sure what HTML canvas actually is? The intention of this post is to help understand the best use cases for this API.",
+    "slug": "what-is-html-canvas"
+  }
+]

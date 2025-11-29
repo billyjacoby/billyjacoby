@@ -1,19 +1,42 @@
 import AuthorLayout from '@/layouts/AuthorLayout';
 import { genPageMetadata } from 'app/seo';
-import { Authors, allAuthors } from 'contentlayer/generated';
-import { MDXLayoutRenderer } from 'pliny/mdx-components';
-import { coreContent } from 'pliny/utils/contentlayer';
 
 export const metadata = genPageMetadata({ title: 'About' });
 
 export default function Page() {
-  const author = allAuthors.find((p) => p.slug === 'default') as Authors;
-  const mainContent = coreContent(author);
-
   return (
     <>
-      <AuthorLayout content={mainContent}>
-        <MDXLayoutRenderer code={author.body.code} />
+      <AuthorLayout
+        content={{
+          name: 'Billy Jacoby',
+          avatar: '/static/images/billy-avatar.png',
+          occupation: 'Technical Lead / Senior Fullstack Engineer',
+          email: 'billyjacoby@gmail.com',
+          twitter: 'https://x.com/billyjacoby',
+          bluesky: 'https://bsky.app/profile/billyjaco.by',
+          linkedin: 'https://www.linkedin.com/in/billyjacoby/',
+          github: 'https://github.com/billyjacoby',
+        }}
+      >
+        {null}
+        <p>
+          Billy Jacoby is an experienced full-stack developer with a focus on
+          building performant, mobile-friendly applications. He has strong
+          problem-solving skills and a determination to learn and stay up to
+          date with the latest technologies.
+        </p>
+        <p>
+          He has experience in architecting mobile and web applications from the
+          ground up, as well as updating legacy applications to stay performant
+          and on the cutting edge.
+        </p>
+
+        <p>
+          Billy has successfully led engineering teams of all sizes to
+          accomplish the goal of building novel and interesting projects.
+        </p>
+
+        {/* <MDXLayoutRenderer code={author.body.code} /> */}
       </AuthorLayout>
     </>
   );
