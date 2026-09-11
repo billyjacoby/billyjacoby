@@ -1,0 +1,278 @@
+/**
+ * Print / PDF styles for the resume page.
+ *
+ * Scoped under `.resume-root` so nothing here can leak into the rest of the
+ * site. Screen appearance is left to the Tailwind utilities in the page
+ * component; everything below only applies when printing.
+ */
+
+@media print {
+  @page {
+    size: letter;
+    margin: 0.75in;
+  }
+
+  html,
+  body {
+    background: #fff !important;
+    color: #333 !important;
+    font-size: 10pt;
+    /* Word-generated resumes use a humanist sans; match rather than inherit
+       the site's display font. */
+    font-family: 'Aptos', 'Calibri', 'Helvetica Neue', Helvetica, Arial,
+      sans-serif;
+  }
+
+  /* Chrome drops backgrounds/colors in print unless this is set. */
+  .resume-root {
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+
+  /* Site chrome has no place in a printed resume. */
+  body > header,
+  body > footer,
+  nav,
+  .resume-print-hidden {
+    display: none !important;
+  }
+
+  .resume-root {
+    max-width: none !important;
+    padding: 0 !important;
+    margin: 0 !important;
+  }
+
+  /*
+   * The root layout wraps every page in SectionContainer (max-w-3xl, px-4/6)
+   * and a <main> carrying px-6 sm:px-12. On paper that stacks ~4.5rem of dead
+   * padding on each side and squeezes the text measure. `:has()` keeps this
+   * reset scoped to the resume page only.
+   */
+  section:has(.resume-root),
+  main:has(.resume-root),
+  div:has(> .resume-root) {
+    max-width: none !important;
+    min-height: 0 !important;
+    padding: 0 !important;
+    margin: 0 !important;
+  }
+
+  /* Section rhythm comes from the headings' own margins, not space-y-*. */
+  .resume-root > * + * {
+    margin-top: 0 !important;
+  }
+
+  /* ---------------------------------------------------------------- header */
+
+  .resume-header {
+    display: block !important;
+    border-bottom: 1.5pt solid #4472c4;
+    padding-bottom: 6pt;
+    margin-bottom: 4pt;
+  }
+
+  .resume-name {
+    font-size: 24pt !important;
+    font-weight: 700;
+    color: #1f3864 !important;
+    line-height: 1.1;
+    margin-bottom: 2pt;
+  }
+
+  .resume-tagline {
+    font-size: 11pt !important;
+    font-style: italic;
+    font-family: inherit !important;
+    color: #4472c4 !important;
+    /* The screen layout caps this at max-w-md, which wraps it onto two lines
+       on paper. */
+    max-width: none !important;
+    margin-bottom: 4pt;
+  }
+
+  /* The contact line collapses to a single pipe-separated row in print. */
+  .resume-contact-print {
+    display: block !important;
+    font-family: inherit !important;
+    font-size: 9.5pt;
+    color: #595959 !important;
+  }
+
+  .resume-contact-print .resume-contact-sep {
+    margin: 0 6pt;
+    color: #a6a6a6 !important;
+  }
+
+  .resume-contact-print a {
+    color: #595959 !important;
+    text-decoration: none !important;
+  }
+
+  /* -------------------------------------------------------------- sections */
+
+  .resume-section-heading {
+    font-size: 10.5pt !important;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: #2f5597 !important;
+    border-bottom: 0.75pt solid #d9d9d9;
+    padding-bottom: 5pt;
+    margin-top: 16pt;
+    margin-bottom: 10pt;
+    /* Never leave a heading stranded at the foot of a page. */
+    break-after: avoid;
+    page-break-after: avoid;
+  }
+
+  .resume-section {
+    gap: 0 !important;
+    display: block !important;
+  }
+
+  .resume-summary {
+    font-family: inherit !important;
+    font-size: 10pt !important;
+    color: #333 !important;
+    line-height: 1.45;
+  }
+
+  /* ---------------------------------------------------------- work entries */
+
+  /* Cards are a screen affordance; print wants plain text blocks. */
+  .resume-entry {
+    border: none !important;
+    box-shadow: none !important;
+    background: transparent !important;
+    padding: 0 !important;
+    margin: 0 0 10pt 0 !important;
+    break-inside: avoid;
+    page-break-inside: avoid;
+  }
+
+  .resume-entry-head {
+    display: block !important;
+    padding: 0 !important;
+    margin-bottom: 2pt;
+  }
+
+  .resume-entry-line {
+    display: block !important;
+    font-size: 10.5pt;
+    line-height: 1.35;
+  }
+
+  /* Flex `gap` stops applying once the line becomes a block of inline spans,
+     and several children inherit `font-mono` from their components. */
+  .resume-entry-line * {
+    font-family: inherit !important;
+  }
+
+  .resume-entry-title {
+    /* h3 is block-level by default, which would break the company and dates
+       onto a second line. The PDF keeps the whole entry on one line. */
+    display: inline !important;
+    font-weight: 700;
+    color: #1f3864 !important;
+    font-size: 10.5pt !important;
+    font-family: inherit !important;
+  }
+
+  .resume-entry-company {
+    display: inline !important;
+    color: #4472c4 !important;
+    font-family: inherit !important;
+    font-size: 10.5pt !important;
+    text-decoration: none !important;
+  }
+
+  .resume-entry-dates {
+    font-style: italic;
+    color: #595959 !important;
+    margin-left: 4pt;
+  }
+
+  /* Separators are decorative on screen, structural in print. */
+  .resume-entry-sep {
+    display: inline !important;
+    color: #a6a6a6 !important;
+    margin: 0 4pt;
+  }
+
+  /* Badges become plain italic text, matching the PDF's "· Remote". */
+  .resume-entry-badges,
+  .resume-entry-badges > * {
+    display: inline !important;
+    background: transparent !important;
+    border: none !important;
+    padding: 0 !important;
+    font-size: 10pt !important;
+    font-weight: 400 !important;
+    font-style: italic;
+    color: #595959 !important;
+  }
+
+  .resume-entry-body {
+    padding: 0 !important;
+    margin: 0 !important;
+    font-size: 10pt !important;
+    /* CardContent ships with `font-mono`; paper wants the humanist sans. */
+    font-family: inherit !important;
+  }
+
+  .resume-highlights {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    font-family: inherit !important;
+  }
+
+  .resume-highlights li {
+    margin: 0 0 4pt 0;
+    font-size: 10pt;
+    font-family: inherit !important;
+    line-height: 1.4;
+    color: #333 !important;
+    break-inside: avoid;
+    page-break-inside: avoid;
+  }
+
+  /* ----------------------------------------------------- skills; education */
+
+  .resume-skills-print {
+    display: block !important;
+    font-size: 10pt;
+    line-height: 1.45;
+    color: #333 !important;
+  }
+
+  .resume-education-entry {
+    break-inside: avoid;
+    page-break-inside: avoid;
+  }
+
+  .resume-education-school {
+    display: inline !important;
+    color: #4472c4 !important;
+    font-size: 10.5pt !important;
+  }
+
+  .resume-education-degree {
+    display: inline !important;
+    font-weight: 700;
+    color: #1f3864 !important;
+    font-size: 10.5pt !important;
+  }
+
+  .resume-education-date {
+    font-style: italic;
+    color: #595959 !important;
+    margin-left: 4pt;
+  }
+
+  /* Links print as plain text — a URL underline is noise on paper. */
+  .resume-root a {
+    text-decoration: none !important;
+  }
+}

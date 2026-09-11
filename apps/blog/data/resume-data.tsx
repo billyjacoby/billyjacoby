@@ -7,17 +7,21 @@ import { XIcon } from '@/components/resume/icons/XIcon';
 export const RESUME_DATA = {
   name: 'Billy Jacoby',
   initials: 'WKJ',
-  location: 'Brodheadsville, Pennsylvania, USA',
+  location: 'Brodheadsville, PA',
   locationLink: 'https://www.google.com/maps/place/Brodheadsville',
   about:
-    'Experienced Full Stack Engineer focused on building performant and enjoyable applications',
+    'Engineering leader specializing in mobile — scaling teams, architecture, and product delivery',
   summary:
-    'I specialize in the development of high-performing mobile first applications. I possess exceptional problem-solving abilities and continuously learn new things by staying up to date with cutting-edge technologies. I primarily focus my time around TypeScript, React, React Native, and Node.js frameworks.',
+    'Engineering leader with a decade of hands-on product development, currently heading mobile at Injective Labs. I specialize in architecting and delivering high-performance, mobile-first applications at scale. With a strong foundation in TypeScript, React, React Native, and Node.js, I bring both technical depth and engineering leadership to every engagement — from early-stage product development to scaling systems for hundreds of thousands of users.',
   avatarUrl: 'https://avatars.githubusercontent.com/u/27246508?v=4',
   personalWebsiteUrl: 'https://billyjacoby.com',
   contact: {
     email: 'billyjacoby@gmail.com',
-    tel: '+16313072188',
+    /**
+     * Shown only in the printed/PDF output. This is a visual treatment, not a
+     * privacy control — the value is still present in the served HTML source.
+     */
+    printOnlyTel: '+1 (631) 307-2188',
     social: [
       {
         name: 'GitHub',
@@ -43,29 +47,40 @@ export const RESUME_DATA = {
       badges: ['Remote'],
       title: 'Head of Mobile Development',
       start: 'Sept 2024',
-      end: 'Now',
-      description:
-        'Leading mobile development initiatives at Injective Labs, focusing on building and scaling decentralized finance (DeFi) applications. Responsible for architecting and developing mobile solutions that interface with the Injective blockchain and ensuring delivery of high-quality, secure financial applications.',
+      end: 'Present',
+      highlights: [
+        'Own and execute mobile engineering strategy, delivering scalable, user-centric applications aligned with evolving product and platform needs',
+        'Lead and mentor fellow engineers while driving cross-functional collaboration across product, platform, and infrastructure teams',
+        'Architect and ship complex, high-performance mobile applications that interface with distributed systems and real-time data pipelines',
+        'Designed and implemented a backend-for-frontend (BFF) platform powering critical internal systems, leveraging Node.js, TypeScript, Hono, MongoDB, Redis, and BullMQ to enable scalable, resilient workflows',
+      ],
     },
     {
       company: '28 Wellness',
       link: 'https://28.co',
       badges: ['Remote'],
-      title: 'Technical Lead -> Head of Engineering',
+      title: 'Technical Lead → Head of Engineering',
       start: 'June 2023',
       end: 'Sept 2024',
-      description:
-        'Primary in house engineer for a fast growing health tech startup. Grew technical infrastructure to support increase from 50k MAU to over 500k MAU in a few months. Responsible for translating all product ideas and business decisions into technical projects, and also carrying out a number of these projects from start to finish. Managed a combined team of in house engineers and contractors.',
+      highlights: [
+        'Served as the primary engineer owning architecture, development, and delivery across the platform',
+        'Scaled infrastructure to support rapid growth from 50K to over 500K monthly active users',
+        'Translated business goals into clear technical initiatives and shipped multiple projects end-to-end',
+        'Built and managed a hybrid team of internal engineers and contractors',
+      ],
     },
     {
       company: 'Frontrunner',
-      link: 'https://twitter.com/frontrunnerxyz?lang=en',
+      link: 'https://twitter.com/frontrunnerxyz',
       badges: ['Remote'],
       title: 'Software Engineer → Senior Software Engineer',
       start: 'Jan 2022',
       end: 'June 2023',
-      description:
-        "Led the Frontend team in developing the company's web application and native mobile apps. The project was architected and developed from ideation to delivery under my guidance, leveraging deep technical knowledge and experience in frontend development. Ensure team’s priorities stay aligned with the company’s direction and on track for timely completion.",
+      highlights: [
+        'Led frontend development for web and mobile applications from concept to production',
+        'Defined and implemented frontend architecture across platforms',
+        'Ensured alignment between engineering work and business priorities, consistently delivering on schedule',
+      ],
     },
     {
       company: 'Solspace Wallet',
@@ -73,29 +88,46 @@ export const RESUME_DATA = {
       title: 'Software Engineer',
       start: '2020',
       end: '2022',
-      description:
-        'Designed, architected, and optimized a React Native application that enabled interaction with the Solana blockchain using a Bluetooth hardware wallet. Technical challenges included scaling for thousands of users, optimizing code, and caching to improve performance.',
+      highlights: [
+        'Designed and built a React Native app for secure interaction with the Solana blockchain',
+        'Integrated Bluetooth hardware wallets and optimized performance for real-world usage',
+        'Implemented caching and scaling strategies to support thousands of concurrent users',
+      ],
     },
     {
       company: 'Prometheus Technology',
       link: 'https://www.prometheus-ts.com',
       badges: ['Owner'],
-      title: 'Software Engineer',
+      title: 'Owner / Software Engineer',
       start: '2016',
       end: '2021',
-      description:
-        'Overcome unique technical challenges designing and building custom websites and web applications for medium to large-sized businesses. Utilized my extensive knowledge of various programming languages and the ability to develop and implement bespoke e-commerce solutions. Through a combination of technical expertise and problem-solving skills, I successfully delivered tailored web solutions that met the specific needs of each customer.',
+      highlights: [
+        'Founded and operated a custom software consultancy',
+        'Delivered web applications and e-commerce solutions for mid-to-large-sized clients',
+        'Worked across a wide range of technologies to build tailored, scalable products',
+      ],
+    },
+  ],
+  education: [
+    {
+      school: 'Palm Beach State College',
+      degree: 'Associate of Arts',
+      date: 'c. 2020',
     },
   ],
   skills: [
-    'JavaScript',
     'TypeScript',
-    'React/Next.js/Remix',
+    'React',
     'React Native',
     'Node.js',
-    'GraphQL',
-    'tRPC',
-    'WebRTC',
+    'System Design',
+    'Distributed Systems',
+    'API Design',
+    'MongoDB',
+    'SQL Databases',
+    'Redis',
+    'BullMQ',
+    'Mobile Architecture',
   ],
   projects: [
     {
@@ -120,7 +152,7 @@ export const RESUME_DATA = {
     {
       title: 'Bird Watcher',
       techStack: ['Side Project', 'TypeScript', 'React Native', 'NVR'],
-      description: 'A mobile app built to interface with Frigate NVR..',
+      description: 'A mobile app built to interface with Frigate NVR.',
       link: {
         label: 'Bird Watcher on GitHub',
         href: 'https://github.com/billyjacoby/bird-watcher',
