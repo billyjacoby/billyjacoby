@@ -4,12 +4,14 @@
   "private": true,
   "scripts": {
     "start": "next dev",
+    "predev": "tsx ./scripts/get-post-data.ts",
     "dev": "cross-env INIT_CWD=$PWD next dev & tsx ./scripts/watch-posts.ts",
     "prebuild": "tsx ./scripts/get-post-data.ts",
     "build": "cross-env INIT_CWD=$PWD next build && cross-env NODE_OPTIONS='--experimental-json-modules' node ./scripts/postbuild.mjs",
     "serve": "next start",
     "analyze": "cross-env ANALYZE=true next build",
     "lint": "next lint --fix --dir pages --dir app --dir components --dir lib --dir layouts --dir scripts",
+    "pretype-check": "tsx ./scripts/get-post-data.ts",
     "type-check": "tsc --pretty --noEmit",
     "generate:post-data": "tsx ./scripts/get-post-data.ts"
   },

@@ -46,7 +46,7 @@ importers:
         version: 0.5.13(tailwindcss@3.4.6)
       '@vercel/analytics':
         specifier: ^1.5.0
-        version: 1.5.0(next@14.2.13(@babel/core@7.24.7)(@opentelemetry/api@1.4.1)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(sass@1.81.0))(react@18.3.1)
+        version: 1.5.0(next@15.0.3(@babel/core@7.24.7)(@opentelemetry/api@1.4.1)(react-dom@19.0.0-rc.1(react@19.0.0-rc.1))(react@19.0.0-rc.1)(sass@1.81.0))(react@19.0.0-rc.1)
       '@vercel/edge':
         specifier: ^1.1.1
         version: 1.1.1
@@ -10152,10 +10152,10 @@ snapshots:
 
   '@ungap/structured-clone@1.2.0': {}
 
-  '@vercel/analytics@1.5.0(next@14.2.13(@babel/core@7.24.7)(@opentelemetry/api@1.4.1)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(sass@1.81.0))(react@18.3.1)':
+  '@vercel/analytics@1.5.0(next@15.0.3(@babel/core@7.24.7)(@opentelemetry/api@1.4.1)(react-dom@19.0.0-rc.1(react@19.0.0-rc.1))(react@19.0.0-rc.1)(sass@1.81.0))(react@19.0.0-rc.1)':
     optionalDependencies:
-      next: 14.2.13(@babel/core@7.24.7)(@opentelemetry/api@1.4.1)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(sass@1.81.0)
-      react: 18.3.1
+      next: 15.0.3(@babel/core@7.24.7)(@opentelemetry/api@1.4.1)(react-dom@19.0.0-rc.1(react@19.0.0-rc.1))(react@19.0.0-rc.1)(sass@1.81.0)
+      react: 19.0.0-rc.1
 
   '@vercel/edge@1.1.1': {}
 

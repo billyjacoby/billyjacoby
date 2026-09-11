@@ -1,11 +1,12 @@
 import siteMetadata from '@/data/siteMetadata';
-import postData from 'data/post-data.json';
+import { publishedPosts } from '@/lib/posts';
 import { MetadataRoute } from 'next';
+
 export default function sitemap(): MetadataRoute.Sitemap {
   const siteUrl = siteMetadata.siteUrl;
-  const blogRoutes = postData.map((post) => ({
-    url: `${siteUrl}/${post.slug}`,
-    lastModified: post.date,
+  const blogRoutes = publishedPosts.map((post) => ({
+    url: `${siteUrl}/blog/${post.slug}`,
+    lastModified: post.lastmod ?? post.date,
   }));
 
   const routes = ['', 'blog', 'projects', 'tags'].map((route) => ({

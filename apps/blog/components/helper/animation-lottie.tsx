@@ -1,6 +1,11 @@
 'use client';
 
-import Lottie from 'lottie-react';
+import dynamic from 'next/dynamic';
+
+// `lottie-web` calls `document.createElement` at module scope, so it cannot be
+// evaluated during SSR/prerender. Loading it browser-only keeps the pages that
+// use it statically renderable.
+const Lottie = dynamic(() => import('lottie-react'), { ssr: false });
 
 const AnimationLottie = ({
   animationPath,

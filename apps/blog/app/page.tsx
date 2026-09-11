@@ -5,12 +5,10 @@ import HeroSection from '@/components/homepage/hero-section';
 import Projects from '@/components/homepage/projects';
 
 import Skills from '@/components/homepage/skills';
-import postData from 'data/post-data.json';
-
-export const dynamic = 'force-dynamic';
+import { publishedPosts } from '@/lib/posts';
 
 export default async function Home() {
-  const posts = postData.filter((b) => b?.draft !== true);
+  const posts = publishedPosts;
 
   return (
     <div>

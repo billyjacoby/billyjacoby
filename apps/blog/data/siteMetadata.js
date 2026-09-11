@@ -7,7 +7,7 @@ const siteMetadata = {
   language: 'en-us',
   theme: 'system', // system, dark or light
   siteUrl: 'https://billyjacoby.com',
-  siteRepo: 'https://github.com/billyjacoby/blog',
+  siteRepo: 'https://github.com/billyjacoby/billyjacoby',
   siteLogo: '/static/images/logo.png',
   socialBanner: '/static/images/twitter-card.png',
   mastodon: 'https://mastodon.social/@mastodonuser',

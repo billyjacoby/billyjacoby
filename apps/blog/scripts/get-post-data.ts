@@ -41,7 +41,9 @@ export async function generatePostData() {
         const { data } = matter(fileContents);
         acc.postData.push({ ...data, slug } as PostData);
 
-        if (data.tags?.length) {
+        // Draft posts are not publicly listed, so they must not contribute to
+        // the tag counts rendered on /tags.
+        if (data.draft !== true && data.tags?.length) {
           for (const tag of data.tags) {
             acc.tagData[tag] = (acc.tagData[tag] || 0) + 1;
           }

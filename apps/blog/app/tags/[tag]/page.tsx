@@ -1,11 +1,10 @@
 import siteMetadata from '@/data/siteMetadata';
 import ListLayout from '@/layouts/ListLayoutWithTags';
+import { publishedPosts } from '@/lib/posts';
 import { genPageMetadata } from 'app/seo';
-import tagData from 'app/tag-data.json';
 import { slug } from 'github-slugger';
 import { Metadata } from 'next';
-
-import postData from 'data/post-data.json';
+import tagData from 'data/tag-data.json';
 
 export async function generateMetadata({
   params,
@@ -28,9 +27,9 @@ export async function generateMetadata({
 
 export const generateStaticParams = async () => {
   const tagCounts = tagData as Record<string, number>;
-  const tagKeys = Object.keys(tagCounts);
-  const paths = tagKeys.map((tag) => ({
-    tag: tag,
+  // Keys are human-readable tag names ("3d printing"); routes use the slug.
+  const paths = Object.keys(tagCounts).map((tag) => ({
+    tag: slug(tag),
   }));
   return paths;
 };
@@ -43,12 +42,8 @@ export default async function TagPage({
   const { tag } = await params;
   // Capitalize first letter and convert space to dash
   const title = tag[0].toUpperCase() + tag.split(' ').join('-').slice(1);
-  const filteredPosts = postData
-    .filter((post) => post.tags && post.tags.map((t) => slug(t)).includes(tag))
-    .sort(
-      (a, b) =>
-        new Date(b.lastmod ?? b.date).getTime() -
-        new Date(a.lastmod ?? a.date).getTime()
-    );
+  const filteredPosts = publishedPosts.filter((post) =>
+    post.tags?.map((t) => slug(t)).includes(tag)
+  );
   return <ListLayout posts={filteredPosts} title={title} />;
 }

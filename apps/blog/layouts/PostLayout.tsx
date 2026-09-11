@@ -27,9 +27,10 @@ interface LayoutProps {
   prev?: { path: string; title: string };
   children: ReactNode;
   date: string;
-  lastmod: string;
+  lastmod?: string;
   title: string;
   tags: string[];
+  slug: string;
 }
 
 export default async function PostLayout({
@@ -41,9 +42,8 @@ export default async function PostLayout({
   next,
   prev,
   children,
+  slug,
 }: LayoutProps) {
-  // const basePath = path.split('/')[0];
-
   return (
     <SectionContainer>
       <ScrollTopAndComment />
@@ -135,7 +135,7 @@ export default async function PostLayout({
                 </ul>
               </dd>
             </dl>
-            <ClientPostComponents>{children}</ClientPostComponents>
+            <ClientPostComponents slug={slug}>{children}</ClientPostComponents>
 
             <footer>
               <div className="divide-gray-200 text-sm font-medium leading-5 dark:divide-gray-700 xl:col-start-1 xl:row-start-2 xl:divide-y">

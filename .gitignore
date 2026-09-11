@@ -1,2 +1,5 @@
 ***/node_modules/
 .yarn/install-state.gz
+# Generated post metadata (built by apps/blog prebuild)
+apps/blog/data/post-data.json
+apps/blog/data/tag-data.json

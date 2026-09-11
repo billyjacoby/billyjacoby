@@ -3,7 +3,7 @@ import GithubSlugger from 'github-slugger';
 import path from 'path';
 import { sortPosts } from 'pliny/utils/contentlayer.js';
 import { escape } from 'pliny/utils/htmlEscaper.js';
-import tagData from '../app/tag-data.json' with { type: 'json' };
+import tagData from '../data/tag-data.json' with { type: 'json' };
 import postData from '../data/post-data.json' with { type: 'json' };
 import siteMetadata from '../data/siteMetadata.js';
 
@@ -38,7 +38,7 @@ const generateRss = (config, posts, page = 'feed.xml') => `
 `;
 
 async function generateRSS(config, allBlogs, page = 'feed.xml') {
-  const publishPosts = postData.filter((post) => post.draft !== true);
+  const publishPosts = allBlogs.filter((post) => post.draft !== true);
   // RSS for blog post
   if (publishPosts.length > 0) {
     const rss = generateRss(config, sortPosts(publishPosts));
@@ -46,12 +46,19 @@ async function generateRSS(config, allBlogs, page = 'feed.xml') {
   }
 
   if (publishPosts.length > 0) {
+    // tag-data.json stores human-readable tag names; URLs use the slugged form.
     for (const tag of Object.keys(tagData)) {
-      const filteredPosts = allBlogs.filter((post) =>
-        post.tags.map((t) => GithubSlugger.slug(t)).includes(tag)
+      const tagSlug = GithubSlugger.slug(tag);
+      const filteredPosts = publishPosts.filter((post) =>
+        post.tags?.map((t) => GithubSlugger.slug(t)).includes(tagSlug)
       );
-      const rss = generateRss(config, filteredPosts, `tags/${tag}/${page}`);
-      const rssPath = path.join('public', 'tags', tag);
+      if (filteredPosts.length === 0) continue;
+      const rss = generateRss(
+        config,
+        sortPosts(filteredPosts),
+        `tags/${tagSlug}/${page}`
+      );
+      const rssPath = path.join('public', 'tags', tagSlug);
       mkdirSync(rssPath, { recursive: true });
       writeFileSync(path.join(rssPath, page), rss);
     }
